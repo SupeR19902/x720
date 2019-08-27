@@ -1,5 +1,9 @@
 # x720
  x720 Tools
+ 
+```
+git clone https://github.com/Tristan79/x720.git
+```
 
 Make sure i2c is enabled with raspi-config.
 
