@@ -1,47 +1,33 @@
 # x720
  x720 Tools
 
-Download
-------------------
-
-Download packages
-
+Download the packages needed for running
 ```
-git clone https://github.com/Tristan79/x720.git
-sudo apt-get install python3-pip
-sudo pip3 install smbus
-sudo pip3 install paho-mqtt
+sudo ./x720/x720packages.sh
 ```
 
-Install
-------------------
-
-Install real time clock and optional the x720 button
-
+Setup the real time clock
 ```
-cd x720/
-sudo ./x720rtc.sh
-#sudo ./x720button.sh
+sudo ./x720/x720rtc.sh
+```
+
+Set up the top button (do not use)
+```
+#sudo ./x720/x720button.sh
 ```
 
 Make the battery monitor run (every minute) by editing crontab with the command:
-
 ```
 sudo crontab -e
 ```
 Add the following line:
-
 ```
 * * * * * /home/pi/x720/x720battery.py
 ```
 
-Setup
-------------------
+Create battery monitor configuration file x720battery.conf. Use the example configuration file as base.
 
-Domoticz:
+If you use domoticz: Create a Voltage, Text and Percentage devices with the domoticzs dummy hardware, look up their idx's and edit the x720battery.conf file, filling in the host, port and idx. And make sure you enable it.
 
-Create three custom sensors with domoticz dummy hardware.
-Create a Voltage, Text and Percentage devices, look up their idx and edit the x720battery.conf file. Use the example file as base.
-
-MQTT:
+If you use MQTT:
 

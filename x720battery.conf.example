@@ -1,15 +1,22 @@
 [Domoticz]
+enabled = False
+
+host = 127.0.0.1
+port = 80
 password = ""
 username = ""
-port = 80
-host = 127.0.0.1
+
+# fill here the idx of the devices
 capacity = ?
 status = ?
 voltage = ?
-enabled = False
+
 
 [MQTT]
+enabled = False
+
 password = ""
 username = ""
 port = 1883
 host = 127.0.0.1
+
