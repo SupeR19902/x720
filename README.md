@@ -5,12 +5,16 @@ Make sure i2c is enabled with raspi-config.
 
 Download the packages needed for running:
 ```
-sudo ./x720/x720packages.sh
+sudo apt-get install python3-pip i2c-tools
+pip3 install smbus
+pip3 install paho-mqtt
 ```
 
 Setup the real time clock:
 ```
-sudo ./x720/x720rtc.sh
+sudo sed -i '$ i rtc-ds1307' /etc/modules
+sudo sed -i '$ i echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device' /etc/rc.local
+sudo sed -i '$ i hwclock -s' /etc/rc.local
 ```
 
 Set up the top button (do not use):
