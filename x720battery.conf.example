@@ -1,0 +1,15 @@
+[Domoticz]
+password = ""
+username = ""
+port = 80
+host = 127.0.0.1
+capacity = ?
+status = ?
+voltage = ?
+enabled = False
+
+[MQTT]
+password = ""
+username = ""
+port = 1883
+host = 127.0.0.1
