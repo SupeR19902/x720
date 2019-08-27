@@ -1,17 +1,19 @@
 # x720
  x720 Tools
 
-Download the packages needed for running
+Make sure i2c is enabled with raspi-config.
+
+Download the packages needed for running:
 ```
 sudo ./x720/x720packages.sh
 ```
 
-Setup the real time clock
+Setup the real time clock:
 ```
 sudo ./x720/x720rtc.sh
 ```
 
-Set up the top button (do not use)
+Set up the top button (do not use):
 ```
 #sudo ./x720/x720button.sh
 ```
@@ -27,7 +29,7 @@ Add the following line:
 
 Create battery monitor configuration file x720battery.conf. Use the example configuration file as base.
 
-If you use domoticz: Create a Voltage, Text and Percentage devices with the domoticzs dummy hardware, look up their idx's and edit the x720battery.conf file, filling in the host, port and idx. And make sure you enable it.
+If you use domoticz: Create a Voltage, Text and Percentage devices with the domoticzs dummy hardware. Look up their idx's and edit the x720battery.conf file. And make sure you enable it.
 
 If you use MQTT:
-
+edit the x720battery.conf file. And make sure you enable it.
