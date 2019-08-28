@@ -2,8 +2,8 @@
 enabled = False
 host = 127.0.0.1
 port = 80
-username = ""
-password = ""
+username =
+password =
 # fill here the idx of the devices
 capacity = ?
 status = ?
@@ -11,8 +11,8 @@ voltage = ?
 
 [MQTT]
 enabled = False
-username = ""
-password = ""
+username =
+password =
 port = 1883
 host = 127.0.0.1
 topic = x720
