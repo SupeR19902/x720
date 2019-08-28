@@ -32,6 +32,16 @@ Set up the top button & stuff (do not use):
 
 Run the battery monitor 
 
+```
+./x720battery.py
+```
+
+or 
+
+```
+/home/pi/x720/x720battery.py
+```
+
 Make the battery monitor run (every minute) by editing crontab with the command:
 ```
 sudo crontab -e
