@@ -1,7 +1,9 @@
 # x720
- x720 Tools 
+x720 Tools 
  
- Battery Status to View or send to Domoticz or MQTT
+Battery monitor: status view or send to Domoticz or MQTT
+Setting up the real time clock
+The buttons..  more on that later see: http://www.raspberrypiwiki.com/index.php/X720
  
 ```
 git clone https://github.com/Tristan79/x720.git
@@ -23,7 +25,7 @@ sudo sed -i '$ i echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device' /et
 sudo sed -i '$ i hwclock -s' /etc/rc.local
 ```
 
-Set up the top & stuff button (do not use):
+Set up the top button & stuff (do not use):
 ```
 #sudo ./x720/x720button.sh
 ```
