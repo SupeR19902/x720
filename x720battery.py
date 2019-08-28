@@ -4,18 +4,32 @@ import smbus
 import sys
 import time
 import configparser
+import os
 
 # Read config
 config = configparser.ConfigParser()
-config.read(r'x720battery.conf')
-domoticz_host = config.get('Domoticz', 'host')
-domoticz_port = config.get('Domoticz', 'port')
-domoticz_username = config.get('Domoticz', 'username')
-domoticz_password = config.get('Domoticz', 'password')
-domoticz_enabled = config.getboolean('Domoticz', 'enabled')
-idx_capacity = config.get('Domoticz', 'capacity')
-idx_voltage  = config.get('Domoticz', 'voltage')
-idx_status   = config.get('Domoticz', 'status')
+os.chdir(os.path.dirname(sys.argv[0]))
+try:
+    config.read(r'x720battery.conf')
+
+    domoticz_host = config.get('Domoticz', 'host')
+    domoticz_port = config.get('Domoticz', 'port')
+    domoticz_username = config.get('Domoticz', 'username')
+    domoticz_password = config.get('Domoticz', 'password')
+    domoticz_enabled = config.getboolean('Domoticz', 'enabled')
+    idx_capacity = config.get('Domoticz', 'capacity')
+    idx_voltage  = config.get('Domoticz', 'voltage')
+    idx_status   = config.get('Domoticz', 'status')
+
+    mqtt_host = config.get('MQTT', 'host')
+    mqtt_port = config.get('MQTT', 'port')
+    mqtt_username = config.get('MQTT', 'username')
+    mqtt_password = config.get('MQTT', 'password')
+    mqtt_enabled = config.getboolean('MQTT', 'enabled')
+    mqtt_topic = config.get('MQTT', 'topic')
+except:
+    domoticz_enabled = False
+    mqtt_enabled = False
 
 # Read Values
 bus = smbus.SMBus(1) # 0 = /dev/i2c-0 (port I2C0), 1 = /dev/i2c-1 (port I2C1)
@@ -61,7 +75,7 @@ print ("Status : " + status)
 if domoticz_enabled:
     import urllib.request
     import base64
-
+    
     def domoticz(v,c,s):
         s = urllib.parse.quote(s)
         base64string = base64.encodebytes(('%s:%s' % (domoticz_username, domoticz_password)).encode()).decode().replace('\n', '')
@@ -72,10 +86,25 @@ if domoticz_enabled:
             request_.add_header("Authorization", "Basic %s" % base64string)
             response = urllib.request.urlopen(request_)
             return response.read()
-            
-            domoticzrequest("type=command&param=udevice&idx="+ idx_voltage + "&nvalue=&svalue=" + str(v))
-            domoticzrequest("type=command&param=udevice&idx="+ idx_capacity + "&nvalue=&svalue=" + str(c))
-            domoticzrequest("type=command&param=udevice&idx="+ idx_status + "&nvalue=0&svalue=" + s)
-            print ('Domoticz Done')
-
+        
+        domoticzrequest("type=command&param=udevice&idx="+ idx_voltage + "&nvalue=&svalue=" + str(v))
+        domoticzrequest("type=command&param=udevice&idx="+ idx_capacity + "&nvalue=&svalue=" + str(c))
+        domoticzrequest("type=command&param=udevice&idx="+ idx_status + "&nvalue=0&svalue=" + s)
+        print ('Domoticz Done')
+    
     domoticz(voltage,capacity,status)
+
+# Handle MQTT
+if mqtt_enabled:
+    import paho.mqtt.client as mqtt
+    client = mqtt.Client()
+    client.username_pw_set(mqtt_username,mqtt_password)
+    client.connect(mqtt_host,int(mqtt_port))
+    client.publish(mqtt_topic + "/capacity",capacity)
+    client.publish(mqtt_topic + "/voltage",voltage)
+    client.publish(mqtt_topic + "/status",status)
+    # we need this delay!!!!
+    time.sleep(0.05)
+    client.disconnect()
+    print ('MQTT Done')
+
