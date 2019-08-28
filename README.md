@@ -1,9 +1,9 @@
 # x720
 x720 Tools 
  
-Battery monitor: status view or send to Domoticz or MQTT
-Setting up the real time clock
-The buttons..  more on that later see: http://www.raspberrypiwiki.com/index.php/X720
+ * Battery monitor: view or send to Domoticz or MQTT
+ * Setting up the real time clock
+ * The buttons..  more on that later see: http://www.raspberrypiwiki.com/index.php/X720
  
 ```
 git clone https://github.com/Tristan79/x720.git
