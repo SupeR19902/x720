@@ -141,6 +141,8 @@ So fast track to bonding...
 
 ### Bonding ###
 
+Reference: https://raspberrypi.stackexchange.com/revisions/78788/15
+
 Using two wires as one!
 
 This will be a very short walkthrough of bonding... if you have issues or missing info well post an issue.
