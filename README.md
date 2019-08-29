@@ -113,12 +113,10 @@ or
 ```
 
 Make the battery monitor run (every minute) by editing crontab with the command:
+
+sudo nano /etc/crontab
 ```
-sudo crontab -e
-```
-Add the following line:
-```
-* * * * * /home/pi/x720/x720battery.py
+* * * * * root /home/pi/x720/x720battery.py
 ```
 
 Create battery monitor configuration file x720battery.conf. Use the included example configuration file as base.
