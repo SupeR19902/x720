@@ -110,7 +110,7 @@ or
 /home/pi/x720/x720battery.py
 ```
 
-Make the battery monitor run (every minute) by editing crontab with the command:
+Make the battery monitor and auto shutdown feature run (every minute) by editing crontab with the command:
 
 ```
 sudo nano /etc/crontab
