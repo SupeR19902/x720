@@ -61,7 +61,7 @@ Only buy this if considered the pros and cons, and you are going to use the work
  * Jumper for auto shutdown is 3v DC (according to their specs). But battery meter is so bad it will power off (not safe shutdown) at values lower then ~3.15v high, which is much higher then 3v. Making the jumper useless. DO NOT SET JUMPER
  * Network card can dissapear from your system completely, needing a power unplug and removal of the batteries and thus opening the case, unscrewing 10 screws... whenever that happens
  * Provided little usb cable is reaaaly flimsy and does sometimes stops working. This is not related to network card disappearing thou
- * Battery meter is shit... I mean really shit... up to 112% when full charged. And if it reaches 0% it will still run for more then an hour... __yeah that shitty__
+ * Battery meter is shit... I mean really shit... up to 112% when fully charged. And if it reaches 0% it will still run for more then an hour... __yeah that shitty__
  * Button for reboot or safe shutdown does not work without batteries present. Their specs say otherwise, but it does not work... The GPIO for the button does NOT work without batteries)
  * Makes very, very high pitch sound with no batteries (alas poor dogs & cats... and think of your little children which have still good ears)
  * RTC Time is reset due to bad design... (luckily I am running an NTP server using a usb GPS stick on the same pi)
