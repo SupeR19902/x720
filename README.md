@@ -1,6 +1,6 @@
-# Rasberry Pi suptronics/geekworm x720 (x700/x705/x725/x730/x735/x750) Hat Tools #
+# Rasberry Pi suptronics/geekworm x720 (x700/x705/x725/x730/x735/x750/Maxim MAX17043) Hat Tools #
  
- * Battery monitor: view status and/or send it to Domoticz or MQTT
+ * Battery monitor: view status and/or send it to Domoticz or MQTT (Maxim MAX17043)
  * Safe shutdown workaround in software
  * Setting up the real time clock
  
