@@ -11,13 +11,15 @@
 
 ## __You bought it just to do that...__ ##
 
-## __And now I am warning you NOT to do that...see review__ ##
+## __And now I am warning you NOT to do that...__ ##
+
+### see cons/*pros(?)* review below ###
 
 ```
 git clone https://github.com/Tristan79/x720.git
 ```
 
-Problems (and I mean big problems) and usage overlaps with suptronics x700, x730 and x735 (v2) which uses the same software and probably the new x705, x725 and x750.
+Problems (and I mean big problems) and usage overlaps with suptronics x700, x730 and x735 (v2) which uses the same software and probably the same hardware design... and the new x705, x725 and x750.
 See review of x720.
 
 You can modify/use this for any generic Maxim MAX17043 
@@ -31,13 +33,19 @@ You can modify/use this for any generic Maxim MAX17043
 
 ### Review of x720 ###
 
-I fill in my rant here later!
+I fill in my full rant here later! 
 
-Only buy this if you are going to use the workarounds. And have almost no power outages. 
+Which will be, uhm, yeah... terrible, is a word what does not cover this... and I will fully eleborate and explain the cons and pros (listed below)
 
-Pulling the plug CAN DAMAGE YOUR HAT AND YOUR PI!!! DO NOT PULL THE ADAPTER, AT LEAST WITH TESTING PULL THE PLUG AT THE PI END!!!
+Parts used
+ * 2x suptronic x720 hats (yeah, I have two... one is already broken)
+ * 2x suptronic x720 cases
+ * 2x raspberry Pi 3B (v1.2)
+ * 4x brand new 18650B Panasonic batteries without protection
+ * 2x geekworm 4A power adapters
 
-http://www.raspberrypiwiki.com/index.php/X720
+And yeah, it not only the hardware... but you came here because the software is as bad as the hardware...
+Only buy this if you are going to use the workarounds. And have almost no power outages, like one in every 5 years :(. 
 
 #### Cons ####
 
@@ -67,7 +75,7 @@ http://www.raspberrypiwiki.com/index.php/X720
   
 #### Pros ####
  * If it works it works for more then 8 hours on batteries... (but so does a powerbank) but you can use the battery monitor workaround to save shutdown making it somewhat an ups... almost.
- * Can use network bonding to double network card (doubles the speed with speedtest-cli on a pi 3b)
+ * Can use network bonding to double network card (doubles the speed with speedtest-cli on a pi)
  * Like the case (when I am not touching it see last con)
 
 ##### Conclusion ####
