@@ -4,6 +4,8 @@
  * Safe shutdown workaround in software
  * Setting up the real time clock
  
+WARNING: Pulling the plug CAN DAMAGE YOUR HAT AND YOUR PI!!! DO NOT PULL THE ADAPTER, AT LEAST WITH TESTING PULL THE PLUG AT THE PI END!!! Yeah... that bad isn't it? You bought it just to do that...
+
 ```
 git clone https://github.com/Tristan79/x720.git
 ```
@@ -24,7 +26,9 @@ You can modify/use this for any generic Maxim MAX17043
 
 I fill in my rant here later!
 
-Only buy this if you are going to use the workarounds. And have almost no power outages. Pulling the plug CAN DAMAGE YOUR HAT AND YOUR PI!!! DO NOT PULL THE ADAPTER, AT LEAST WITH TESTING PULL THE PLUG AT THE PI END!!!
+Only buy this if you are going to use the workarounds. And have almost no power outages. 
+
+Pulling the plug CAN DAMAGE YOUR HAT AND YOUR PI!!! DO NOT PULL THE ADAPTER, AT LEAST WITH TESTING PULL THE PLUG AT THE PI END!!!
 
 http://www.raspberrypiwiki.com/index.php/X720
 
