@@ -28,7 +28,7 @@ http://www.raspberrypiwiki.com/index.php/X720
 ##### HAT #####
 * Mayor power spikes on gpio pins
 * Undervoltage detected when pulling the power plug
-* If the shutdown problem occurs when removing the power plug, your board is toast/fried/kaput!!!! (geekworm you lying bastards!!! see https://www.youtube.com/watch?v=enWHudsFcuw)
+* If the shutdown problem occurs when removing the power plug, your board is toast/fried/kaput!!!! (geekworm you lying bastards!!! see https://www.youtube.com/watch?v=enWHudsFcuw)... In my case, with fully charged batteries and no power plug inserted it will NOT TURN ON when pressing the top button (yeah.. it fried something). 
 * The button script will cause reboots when power is lost
 * Jumper for auto shutdown is 3v DC (according to their specs). But battery meter is so bad it will power off (not safe shutdown) at values lower then ~3.15v high, which is much higher then 3v. Making the jumper useless. DO NOT SET JUMPER
  * Network card can dissapear from your system completely, needing a power unplug and removal of the batteries
