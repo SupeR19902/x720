@@ -23,8 +23,9 @@ Only buy this if you are going to use the workarounds. And have almost no power 
 
 http://www.raspberrypiwiki.com/index.php/X720
 
-##### Cons #####
+#### Cons ####
 
+##### HAT #####
 * Mayor power spikes on gpio pins
 * Undervoltage detected when pulling the power plug
 * If the shutdown problem occurs when removing the power plug, your board is toast/fried/kaput!!!! (geekworm you lying bastards!!! see https://www.youtube.com/watch?v=enWHudsFcuw)
@@ -42,13 +43,13 @@ http://www.raspberrypiwiki.com/index.php/X720
  * Very, very crappy hat... damages really fast with power outages
  * Had to implement my own software
  
- 
+##### Case #####
  * No wall mount holes in case
- * Case becomes static...
  * Case Pi microusb has a big X with a circle... instead of closing it up
  * Case seales up the 5v output from the hat
- 
-##### Pros #####
+ * Case becomes static...
+  
+#### Pros ####
 
  * If it works it works for more then 8 hours on batteries... (but so does a powerbank) but you can use the battery monitor workaround to save shutdown making it somewhat an ups... almost.
  * Can use network bonding to double network card (doubles the speed with speedtest-cli on a pi 3b)
