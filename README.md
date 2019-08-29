@@ -31,8 +31,7 @@ http://www.raspberrypiwiki.com/index.php/X720
 * The button script will cause reboots when power is lost
 * Jumper for auto shutdown is 3v DC (according to their specs). But battery meter is so bad it will power off (not safe shutdown) at values lower then ~3.15v high, which is much higher then 3v. Making the jumper useless. DO NOT SET JUMPER
  * Network card can dissapear from your system completely, needing a power unplug and removal of the batteries
- * Little usb cable is reaaaly flimsy and does sometimes not work.
- * No wall mount holes in case
+ * Little usb cable is reaaaly flimsy and does sometimes not work (not related to network card disappearing thou)
  * Battery meter is shit... I mean really shit...
  * Button on gpio triggered when unplugging the power, means spikes on (all/gpio?) electronics when switching from wired power to battery (and back)?
  * Button for reboot or safe shutdown does not work without batteries present (their specs say otherwise)
@@ -42,12 +41,18 @@ http://www.raspberrypiwiki.com/index.php/X720
  * Support from either geekworm or suptronics.com is total crap (geekworm... removing my comments on your youtube videos... really... and lying to your customers to sell, sell, sell...)
  * Very, very crappy hat... damages really fast with power outages
  * Had to implement my own software
+ 
+ 
+ * No wall mount holes in case
  * Case becomes static...
+ * Case Pi microusb has a big X with a circle... instead of closing it up
+ * Case seales up the 5v output from the hat
  
 ##### Pros #####
 
  * If it works it works for more then 8 hours on batteries... (but so does a powerbank) but you can use the battery monitor workaround to save shutdown making it somewhat an ups... almost.
  * Can use network bonding to double network card (doubles the speed with speedtest-cli on a pi 3b)
+ * Like the case (when I am not touching it see last con)
 
 ##### Conclusion #####
 
