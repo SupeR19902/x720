@@ -94,13 +94,12 @@ else:
 s = status
 if len(s) == 3:
     s = ' ' + s
-s = ' ' + s
 
 print ("Maxim MAX17043 v" + str(version))
 print ("Voltage     : %5.2fV" % voltage)
 print ("Raw Capacity: %5i%%" % raw_capacity)
 print ("Battery     : %5i%%" % capacity)
-print ("Status      : " + s)
+print ("Status      :   " + s)
 
 # Handle Domoticz
 if domoticz_enabled:
