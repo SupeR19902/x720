@@ -79,10 +79,10 @@ status = "Normal"
 capacity = 0
 if voltage >= x720_max:
     capacity = 100
-    status = "Max"
+    status = "Full"
 elif voltage < x720_min:
     capacity = 0
-    status = "Shutdown"
+    status = "Halt"
 else:
     capacity = (voltage - x720_min) / (x720_range / 100)
     if capacity < 20:
@@ -91,11 +91,16 @@ else:
         status = "High"
 
 # Print Status
+s = status
+if len(s) == 3:
+    s = ' ' + s
+s = ' ' + s
+
 print ("Maxim MAX17043 v" + str(version))
 print ("Voltage     : %5.2fV" % voltage)
 print ("Raw Capacity: %5i%%" % raw_capacity)
 print ("Battery     : %5i%%" % capacity)
-print ("Status      : " + status)
+print ("Status      : " + s)
 
 # Handle Domoticz
 if domoticz_enabled:
