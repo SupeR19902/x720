@@ -7,7 +7,7 @@
  
 ## __WARNING: PULLING THE POWER CAN DAMAGE YOUR HAT AND YOUR PI!!! NEVER PULL THE ADAPTER FROM THE AC. AT LEAST WITH TESTING, PULL THE PLUG AT THE PI END!!!__ ## 
 
-## __Yeah... it's that bad! :(__ ##
+## __Yeah... this hat is that bad! :(__ ##
 
 ## __You bought it just to do that...__ ##
 
