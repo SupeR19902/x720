@@ -47,19 +47,19 @@ Parts used
 It is not only the hardware... but you came here because the software accompanied is as bad as the hardware...
 Problems occur on both hats, so it is NOT a randomly defective hardware problem. 
 
-Only buy this if considered the pros and cons, and you are going to use the workarounds. And have almost no power outages. Like one in every 5 years :(.  *## YOU HAVE BEEN WARNED ##*
+Only buy this if considered the pros and cons, and you are going to use the workarounds. And have almost no power outages. Like one in every 5 years :(.  __*YOU HAVE BEEN WARNED*__
 
 #### Cons ####
 
 ##### HAT #####
- * Mayor power spikes on GPIO pins when cutting main power
+ * Mayor power spikes on GPIO pins when cutting main power. That makes the extension board with the 40 pins break out of the case, quite useless if you use the batteries) Do not bother using that...
  * Undervoltage detected when cutting the main power
  * Top button, which uses GPIO, is triggered when cutting the main power. That also probably means spikes on all other electronics when switching from wired power to battery (and back)... 
- * Previous con makes the top button for reboot or save shutdown useless! You can still use it as a power on button, or for total power down (make sure you run *sudo halt* first so to not damage your sd card) 
+ * Previous con makes the top button for reboot or save shutdown useless! You can still use it as a power on button, or for total power down. But make sure you run *sudo halt* first so to not damage your sd card before you do that. 
  * If the shutdown problem occurs when removing the power plug, your board is toast/fried/kaput!!!! (geekworm you lying bastards!!! see https://www.youtube.com/watch?v=enWHudsFcuw)... With fully charged batteries and no power plug inserted. If it will *NOT TURN ON* when pressing the top button, you know you are screwed.
  * The button script will cause reboots when power is lost (related to gpio is triggered when...)
  * Jumper for auto shutdown is 3v DC (according to their specs). But battery meter is so bad it will power off (not safe shutdown) at values lower then ~3.15v high, which is much higher then 3v. Making the jumper useless. DO NOT SET JUMPER
- * Network card can dissapear from your system completely, needing a power unplug and removal of the batteries
+ * Network card can dissapear from your system completely, needing a power unplug and removal of the batteries and thus opening the case, unscrewing 10 screws... whenever that happens
  * Provided little usb cable is reaaaly flimsy and does sometimes stops working. This is not related to network card disappearing thou
  * Battery meter is shit... I mean really shit...
  * Button for reboot or safe shutdown does not work without batteries present. Their specs say otherwise, but it does not work... The GPIO for the button does NOT work without batteries)
@@ -68,14 +68,13 @@ Only buy this if considered the pros and cons, and you are going to use the work
  * Sometimes make strange noise when cutting the main power
  * Software provided is bad...  really really bad...
  * Support from either geekworm or suptronics is total crap (geekworm... removing my comments on your youtube videos... really... stop lying to your customers...)
- * Very, very crappy hat... damages really fast with power outages
- * Had to implement my own software
  * When batteries are present and it is completely powered off (hold button for more then 8 to 10 seconds) inserting an usb device or network cable in either ports, lights up/flickers the led on top of the case... you should probably never insert a HDMI cable or sound with the batteries already installed...
+ * Had to implement my own software
  
 ##### Case #####
  * No real wall mount holes in case
- * Case Pi microusb has a big X with a circle... instead of closing it up (Bad design. Intentionally? Why? If you know it will damage the whole system???) 
- * Case seals up the 5v output from the hat. Why is that closed and not the Pi microusb?
+ * Case Pi micro usb has a big X with a circle... instead of closing it up (Bad design. Intentionally? Why leave it open, if you know it will damage the whole system???) 
+ * Case seals up the 5v output from the hat. Why is that closed and not the Pi micro usb?
  * Case feels static, or more probably, the 5v is leaking to the case and I have become ground
  * Top button does not fit properly in the case (of one of the cases)
   
@@ -178,7 +177,7 @@ See the legacy folder (please do not use)
 
 ##### GPIO IN 4 #####
 Button pressed. If pressed it will be none zero value. You have to time the button pressed to determine if you want to reboot or shutdown (or maybe do something else).
-Unplugging the power will result in triggering this GPIO pin (due to spikes from unplugging)... so DO NOT USE the legacy x720button.sh script. It is useless. And forget about using software to use the button... it will not work in combination with a powerloss.
+Unplugging the power will result in triggering this GPIO pin (due to spikes from unplugging)... so DO NOT USE the legacy x720button.sh script. It is useless. And forget about using software to use the button... it will not work in combination with a powerloss. Also note that if you hold the button long enough with will power of the hat and thus the pi...
 
 ##### GPIO OUT 18 ##### 
 Cut power to hat, this will result in immediately power loss to the rasberry pi. This will not result in a save shutdown (because there is no power anymore). Usage: pull to 1 wait some time, pull back to 0. DO NOT USE the original x720shutdown script. It will eventually corrupt your sd card.
@@ -186,7 +185,7 @@ Cut power to hat, this will result in immediately power loss to the rasberry pi.
 Maybe add it to /etc/rc0? Or something equivalent? Executing it as the last command. Please share your thoughts in the issues...
 
 ##### GPIO OUT 17 #####
-Pull to 1 to do something. No really no idea what it does... probably does something...
+Pull to 1 to do something. No really no idea what it does... probably does something... but yeah... no docs available.
 
 #### Bonding ####
 This can also be used with other network cards and other debian installations. No x720 or Pi needed. But because I figured this out with a Pi and with a x720 (total cost: 3 weeks, yeah...), lets share... I probably need to add some more info...
