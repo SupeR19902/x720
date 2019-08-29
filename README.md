@@ -133,7 +133,7 @@ timedatectl status
 ```
 
 ### Software Battery Monitor ###
-Run the battery monitor 
+Run the battery monitor *(I probably should have called it maxim17043battery.py or something equivalent)*
 
 ```
 ./x720battery.py
