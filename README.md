@@ -30,8 +30,8 @@ http://www.raspberrypiwiki.com/index.php/X720
  * Makes high pitch sound with no batteries
  * Sometimes make strange noise when pulling the power plug
  * Software provided is bad...  really really bad...
- * Support from either geekworm or suptronics.com is total crap (removing my comments on your youtube videos... really... and lying to your customers to sell, sell, sell...)
- * Very, very crappy hat...
+ * Support from either geekworm or suptronics.com is total crap (geekworm... removing my comments on your youtube videos... really... and lying to your customers to sell, sell, sell...)
+ * Very, very crappy hat... damages really fast with power outages
  * Had to implement my own software
  
 ##### Pros #####
