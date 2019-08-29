@@ -20,13 +20,9 @@ In this episode... we will enter the exciting world of...
 
 Well I am not amused either...
 
+Problems *and I mean big problems at the hardware and software levels* and hardware/software usage overlaps with suptronics x700, x705, x725, x730, x735 (v2) and x750. Who is provided with the same software and probably the same hardware design... 
+
 ### see cons/*pros(?)* review below ###
-
-```
-git clone https://github.com/Tristan79/x720.git
-```
-
-Problems (and I mean big problems) and usage overlaps with suptronics x700, x730 and x735 (v2) which is provided with the same software and probably the same hardware design... and the new x705, x725 and x750. See review of x720.
 
 You can modify/use this for any generic Maxim MAX17043 using the i2c bus.
 
