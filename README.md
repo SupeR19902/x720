@@ -3,7 +3,7 @@
  * Battery monitor: view status and/or send it to Domoticz or MQTT (Maxim MAX17043)
  * Battery monitor can be used with any generic Maxim MAX17043 (and probably MAX17044) connected to i2c
  * Safe shutdown workaround in software
- * Setting up the real time clock
+ * Setting up properly the real time clock (DS1307)
  
 ## __WARNING: PULLING THE POWER CAN DAMAGE YOUR HAT AND YOUR PI!!! NEVER PULL THE ADAPTER FROM THE AC. AT LEAST WITH TESTING, PULL THE PLUG AT THE PI END!!!__ ## 
 
@@ -25,7 +25,6 @@ See review of x720.
 You can modify/use this for any generic Maxim MAX17043 using the i2c bus.
 
 ### ToDo ###
- * Top button press without rebooting (or at least use the button for something else) 
  * Shutting down the hat when you call shutdown (sudo halt) (use gpio 18 and add it to /etc/rc0? as the final and last command)
  * Other power mangement GPIO stuff
  * Rant! (upvote in issues for youtube rant :-)
@@ -53,6 +52,7 @@ Only buy this if you are going to use the workarounds. And have almost no power 
 * Mayor power spikes on gpio pins
 * Undervoltage detected when pulling the power plug
 * Button on gpio triggered when unplugging the power, means spikes on (all/gpio) electronics when switching from wired power to battery (and back)... 
+* Last con makes the top button for reboot or save shutdown useless! You can still use it as a power on button,or for total power down (make sure you run *sudo halt* first do not damage your sd card) 
 * If the shutdown problem occurs when removing the power plug, your board is toast/fried/kaput!!!! (geekworm you lying bastards!!! see https://www.youtube.com/watch?v=enWHudsFcuw)... With fully charged batteries and no power plug inserted and it will NOT TURN ON when pressing the top button then yeah.. it fried something. 
 * The button script will cause reboots when power is lost (related to gpio is triggered when...)
 * Jumper for auto shutdown is 3v DC (according to their specs). But battery meter is so bad it will power off (not safe shutdown) at values lower then ~3.15v high, which is much higher then 3v. Making the jumper useless. DO NOT SET JUMPER
