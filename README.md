@@ -1,4 +1,4 @@
-# Rasberry Pi x720 Hat Tools #
+# Rasberry Pi suptronics x720 Hat Tools #
  
  * Battery monitor: view status and/or send it to Domoticz or MQTT
  * Safe shutdown workaround in software
