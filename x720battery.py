@@ -140,3 +140,7 @@ if mqtt_enabled:
     client.disconnect()
     print ('MQTT Done')
 
+if status == "Halt":
+    print('Halting...')
+    os.system("shutdown now -h")
+
