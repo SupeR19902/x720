@@ -44,13 +44,13 @@ http://www.raspberrypiwiki.com/index.php/X720
 ##### HAT #####
 * Mayor power spikes on gpio pins
 * Undervoltage detected when pulling the power plug
+* Button on gpio triggered when unplugging the power, means spikes on (all/gpio) electronics when switching from wired power to battery (and back)... 
 * If the shutdown problem occurs when removing the power plug, your board is toast/fried/kaput!!!! (geekworm you lying bastards!!! see https://www.youtube.com/watch?v=enWHudsFcuw)... In my case, with fully charged batteries and no power plug inserted it will NOT TURN ON when pressing the top button (yeah.. it fried something). 
 * The button script will cause reboots when power is lost
 * Jumper for auto shutdown is 3v DC (according to their specs). But battery meter is so bad it will power off (not safe shutdown) at values lower then ~3.15v high, which is much higher then 3v. Making the jumper useless. DO NOT SET JUMPER
  * Network card can dissapear from your system completely, needing a power unplug and removal of the batteries
  * Little usb cable is reaaaly flimsy and does sometimes not work (not related to network card disappearing thou)
  * Battery meter is shit... I mean really shit...
- * Button on gpio triggered when unplugging the power, means spikes on (all/gpio?) electronics when switching from wired power to battery (and back)?
  * Button for reboot or safe shutdown does not work without batteries present (their specs say otherwise)
  * Makes high pitch sound with no batteries (alas poor dogs & cats... and think of your little children which have still good ears)
  * Sometimes make strange noise when pulling the power plug
