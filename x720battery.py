@@ -11,18 +11,19 @@ config = configparser.ConfigParser()
 os.chdir(os.path.dirname(sys.argv[0]))
 try:
     config.read(r'x720battery.conf')
-    x720max = config.get('x720', 'max')
-    x720max = config.get('x720', 'min')
-
+    x720_max = float(config.get('x720', 'max'))
+    x720_min = float(config.get('x720', 'min'))
+    
     domoticz_host = config.get('Domoticz', 'host')
     domoticz_port = config.get('Domoticz', 'port')
     domoticz_username = config.get('Domoticz', 'username')
     domoticz_password = config.get('Domoticz', 'password')
     domoticz_enabled = config.getboolean('Domoticz', 'enabled')
+    idx_raw_capacity = config.get('Domoticz', 'rawcapacity')
     idx_capacity = config.get('Domoticz', 'capacity')
     idx_voltage  = config.get('Domoticz', 'voltage')
     idx_status   = config.get('Domoticz', 'status')
-
+    
     mqtt_host = config.get('MQTT', 'host')
     mqtt_port = config.get('MQTT', 'port')
     mqtt_username = config.get('MQTT', 'username')
@@ -30,10 +31,13 @@ try:
     mqtt_enabled = config.getboolean('MQTT', 'enabled')
     mqtt_topic = config.get('MQTT', 'topic')
 except:
+    print('Config file not found or error reading parameters')
     domoticz_enabled = False
     mqtt_enabled = False
+    x720_min = 3.15
+    x720_max = 4.1
 
-print(type(x720max))
+x720_range = x720_max - x720_min
 
 # Read Values
 bus = smbus.SMBus(1) # 0 = /dev/i2c-0 (port I2C0), 1 = /dev/i2c-1 (port I2C1)
@@ -58,29 +62,47 @@ def readCapacity(bus):
     capacity = swapped/256
     return capacity
 
-capacity = readCapacity(bus)
+raw_capacity = readCapacity(bus)
 voltage = readVoltage(bus)
 version = readVersion(bus)
+
 status = "Normal"
-if capacity < 5:
+"""
+    if capacity < 5:
     status = "Low"
-elif capacity >= 100:
+    elif capacity >= 100:
     status = "Max"
-elif capacity >= 95:
+    elif capacity >= 95:
     status = "High"
+    """
+
+capacity = 0
+if voltage > x720_max:
+    capacity = 100
+    status = "Max"
+elif voltage < x720_min:
+    capacity = 0
+    status = "Shutdown"
+else:
+    capacity = (voltage - x720_min) / (x720_range / 100)
+    if capacity < 20:
+        status = "Low"
+    elif capacity > 80:
+        status = "High"
 
 # Print Status
 print ("Maxim MAX17043 v" + str(version))
-print ("Voltage: %5.2fV" % voltage)
-print ("Battery: %5i%%" % capacity)
-print ("Status : " + status)
+print ("Voltage     : %5.2fV" % voltage)
+print ("Raw Capacity: %5i%%" % raw_capacity)
+print ("Battery     : %5i%%" % capacity)
+print ("Status      : " + status)
 
 # Handle Domoticz
 if domoticz_enabled:
     import urllib.request
     import base64
     
-    def domoticz(v,c,s):
+    def domoticz(v,c,r,s):
         s = urllib.parse.quote(s)
         base64string = base64.encodebytes(('%s:%s' % (domoticz_username, domoticz_password)).encode()).decode().replace('\n', '')
         
@@ -93,10 +115,11 @@ if domoticz_enabled:
         
         domoticzrequest("type=command&param=udevice&idx="+ idx_voltage + "&nvalue=&svalue=" + str(v))
         domoticzrequest("type=command&param=udevice&idx="+ idx_capacity + "&nvalue=&svalue=" + str(c))
+        domoticzrequest("type=command&param=udevice&idx="+ idx_raw_capacity + "&nvalue=&svalue=" + str(r))
         domoticzrequest("type=command&param=udevice&idx="+ idx_status + "&nvalue=0&svalue=" + s)
         print ('Domoticz Done')
     
-    domoticz(voltage,capacity,status)
+    domoticz(voltage,capacity,raw_capacity,status)
 
 # Handle MQTT
 if mqtt_enabled:
@@ -104,6 +127,7 @@ if mqtt_enabled:
     client = mqtt.Client()
     client.username_pw_set(mqtt_username,mqtt_password)
     client.connect(mqtt_host,int(mqtt_port))
+    client.publish(mqtt_topic + "/rawcapacity",raw_capacity)
     client.publish(mqtt_topic + "/capacity",capacity)
     client.publish(mqtt_topic + "/voltage",voltage)
     client.publish(mqtt_topic + "/status",status)

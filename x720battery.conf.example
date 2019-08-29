@@ -9,9 +9,11 @@ port = 80
 username =
 password =
 # fill here the idx of the devices
+# leave it a question mark if you do not want to use that sensor
 capacity = ?
 status = ?
 voltage = ?
+rawcapacity = ?
 
 [MQTT]
 enabled = False
