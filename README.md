@@ -140,7 +140,7 @@ edit the x720battery.conf file. And make sure you enable it.
 
 ### Very Optional Features ###
 
-`#### GPIO ####
+#### GPIO ####
 
 ##### GPIO IN 4 #####
 Button pressed. If pressed it will be none zero value. You have to time the button pressed to determine if you want to reboot or shutdown (or maybe do something else)
