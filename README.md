@@ -8,7 +8,7 @@
 git clone https://github.com/Tristan79/x720.git
 ```
 
-Problems and usage overlaps with suptronics x700, x730 and x735 (v2) which uses the same software and probably the new x705, x725 and x750.
+Problems (and I mean big problems) and usage overlaps with suptronics x700, x730 and x735 (v2) which uses the same software and probably the new x705, x725 and x750.
 See review of x720.
 
 ### ToDo ###
