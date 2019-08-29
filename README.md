@@ -199,7 +199,7 @@ Using two wires as one!
 
 This will be a very short walkthrough of bonding... if you have issues or missing info well post an issue.
 
-I currently use a netgear gs116 which support LAG, which actually is XOR bonding (thanks netgear :( for letting me think I have all the functionallity of LACP but I only got the subset for XOR bonding... netgear just as cheap as their chinese counterparts, only they can hide it better... vommit... documentation just as shit... what is it with you hardware sellers. Make a good product instead of manipulating your customers, you do not have to be manipulating, lying, cheating and be greedy to make money) If you use LACP or XOR bonding do not forget to configure your switch.
+I currently use a netgear gs116 which support LAG, which actually is XOR bonding (thanks netgear :( for letting me think I have all the functionallity of LACP but I only got the subset for XOR bonding... netgear just as cheap as their chinese counterparts, only they learned to hide it better... vommit... documentation just as shit... what is it with you hardware sellers. Make a good product instead of manipulating your customers. You do not have to be manipulating, lying, cheating and be greedy to make money. Just make good products that actually works the way how you promised it to work... If you use LACP or XOR bonding do not forget to configure your switch.
 
 You can use FULL LACP or Active Backup... (google is your friend) for the parameters needed.
 
