@@ -8,6 +8,11 @@
 git clone https://github.com/Tristan79/x720.git
 ```
 
+### ToDo ###
+ * Top button press without rebooting (or at least use the button for something else) 
+ * Shutting down the hat when shutdown (gpio 18 add it to /etc/rc0?)
+ * Rant!
+
 ### Review of x720 ###
 
 I fill in my rant here later!
@@ -127,17 +132,24 @@ If you use domoticz: Create a Voltage, Text and two Percentage devices with the 
 If you use MQTT:
 edit the x720battery.conf file. And make sure you enable it.
 
+## Very Optional Features ##
+
+This can also be used with other network cards and other debian installations. No x720 or Pi needed. But because I figured this out with a Pi and with a x720 (total cost: 3 weeks, yeah...), lets share... I probably need to add some more info...
+So fast track to bonding...
+
 ### Bonding ###
 
 Using two wires as one!
 
 This will be a very short walkthrough of bonding... if you have issues well post an issue.
 
-I currently use a netgear gs116 which support LAG, actually it is XOR bonding (thanks netgear :( for letting me think I have all the functionallity of LACP but I only got the subset for XOR bonding... netgear just as cheap as their chinese counterparts, only they can hide it better... vommit... documentation just as shit... what is it with you hardware sellers. Make a good product instead of manipulating your customers) If you use LACP or XOR bonding do not forget to configure your switch.
+I currently use a netgear gs116 which support LAG, actually it is XOR bonding (thanks netgear :( for letting me think I have all the functionallity of LACP but I only got the subset for XOR bonding... netgear just as cheap as their chinese counterparts, only they can hide it better... vommit... documentation just as shit... what is it with you hardware sellers. Make a good product instead of manipulating your customers, you do not have to be manipulating, lying, cheating and be greedy to make money) If you use LACP or XOR bonding do not forget to configure your switch.
 
 You can use FULL LACP or Active Backup... (google is your friend) for the parameters needed.
 
-I switches over to systemd networking instead of /etc/network/interfaces. I tried the default option with the /etc/network/interfaces and it will result in connecting to wifi (if configured and available) instead of the bond, and it happens in the eye of the beholder randomly. Which is behaviour you do not want... Finally found a solution... Systemd networking fix it. Systemd has very very very poor documentation... :-( 
+I switches over to systemd networking instead of /etc/network/interfaces on the Pi. I tried the default option with the /etc/network/interfaces and it will result in connecting to wifi (if configured and available) instead of the bond in 1 out of 10 situations..., Which is behaviour you do not want... Finally found a solution... Systemd networking fix it. Systemd has very very very poor documentation... :-( Like why if I use static and dhcp mixed with systemd the metric (order of network cards) is fucked? And I have to manually set the metric myself... which is a pain in the butt... Anyway all things have good and bad side, not?
+
+Anyway bonding 180mb throughput instead of 90mbit (maybe more on the newer models)
 
 ```
 sudo nano /etc/resolvconf.conf
