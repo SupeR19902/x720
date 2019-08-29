@@ -31,12 +31,12 @@ http://www.raspberrypiwiki.com/index.php/X720
 * The button script will cause reboots when power is lost
 * Jumper for auto shutdown is 3v DC (according to their specs). But battery meter is so bad it will power off (not safe shutdown) at values lower then ~3.15v high, which is much higher then 3v. Making the jumper useless. DO NOT SET JUMPER
  * Network card can dissapear from your system completely, needing a power unplug and removal of the batteries
- * Little usb cable is reaaaly flimsy.
+ * Little usb cable is reaaaly flimsy and does sometimes not work.
  * No wall mount holes in case
  * Battery meter is shit... I mean really shit...
  * Button on gpio triggered when unplugging the power, means spikes on (all/gpio?) electronics when switching from wired power to battery (and back)?
- * Button for reboot or safe shutdown does not work without batteries present
- * Makes high pitch sound with no batteries
+ * Button for reboot or safe shutdown does not work without batteries present (their specs say otherwise)
+ * Makes high pitch sound with no batteries (alas poor dogs & cats... and think of your little children which have still good ears)
  * Sometimes make strange noise when pulling the power plug
  * Software provided is bad...  really really bad...
  * Support from either geekworm or suptronics.com is total crap (geekworm... removing my comments on your youtube videos... really... and lying to your customers to sell, sell, sell...)
