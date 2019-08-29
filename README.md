@@ -11,6 +11,8 @@ git clone https://github.com/Tristan79/x720.git
 Problems (and I mean big problems) and usage overlaps with suptronics x700, x730 and x735 (v2) which uses the same software and probably the new x705, x725 and x750.
 See review of x720.
 
+You can modify/use this for any generic Maxim MAX17043 
+
 ### ToDo ###
  * Top button press without rebooting (or at least use the button for something else) 
  * Shutting down the hat when shutdown (gpio 18 add it to /etc/rc0? as the final and last command)
