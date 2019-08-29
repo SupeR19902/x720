@@ -128,6 +128,7 @@ Create battery monitor configuration file x720battery.conf. Use the included exa
 
 ##### Save shutdown #####
 Since the jumper for save shutdown and the original software provided is total $#!T, workaround. Use the voltage readout to safely shutdown and calculate the battery percentage. 
+You can adjust the values in the configuration file.
 
 ##### Domoticz #####
 If you use domoticz: Create a Voltage, Text and two Percentage devices with the domoticzs dummy hardware. Look up their idx's and edit the x720battery.conf file. And make sure you enable it.
