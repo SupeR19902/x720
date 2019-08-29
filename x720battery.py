@@ -11,6 +11,8 @@ config = configparser.ConfigParser()
 os.chdir(os.path.dirname(sys.argv[0]))
 try:
     config.read(r'x720battery.conf')
+    x720max = config.get('x720', 'max')
+    x720max = config.get('x720', 'min')
 
     domoticz_host = config.get('Domoticz', 'host')
     domoticz_port = config.get('Domoticz', 'port')
@@ -30,6 +32,8 @@ try:
 except:
     domoticz_enabled = False
     mqtt_enabled = False
+
+print(type(x720max))
 
 # Read Values
 bus = smbus.SMBus(1) # 0 = /dev/i2c-0 (port I2C0), 1 = /dev/i2c-1 (port I2C1)

@@ -1,3 +1,7 @@
+[x720]
+max=4.1
+min=3.15
+
 [Domoticz]
 enabled = False
 host = 127.0.0.1

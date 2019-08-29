@@ -1,9 +1,8 @@
-# x720 #
-x720 Tools 
+# Rasberry Pi x720 Hat Tools #
  
  * Battery monitor: view or send to Domoticz or MQTT
+ * Safe shutdown workaround
  * Setting up the real time clock
- * The buttons..  more on that later see: http://www.raspberrypiwiki.com/index.php/X720
  
 ```
 git clone https://github.com/Tristan79/x720.git
@@ -42,7 +41,7 @@ http://www.raspberrypiwiki.com/index.php/X720
 Do not buy unless you known what you are doing and have considered the work arounds...
 
 
-#### Make evironment great again! ####
+#### Make e-vironment great again! ####
 
 Make sure i2c is enabled with raspi-config.
 
@@ -68,15 +67,13 @@ Remove fake hardware clock and disable one of the time synchronizers
 sudo systemctl disable fake-hwclock
 ```
 
-In /lib/udev/hwclock-set put # in front of these lines
+In /lib/udev/hwclock-set put # in front of these lines and the 2 lines containing --systz
 
 ```
 if [-e /run/systemd/system ]; then
 exit
 fi
 ```
-
-and the 2 lines containing --systz
 
 Reboot and test with
 
@@ -123,8 +120,11 @@ Add the following line:
 
 Create battery monitor configuration file x720battery.conf. Use the included example configuration file as base.
 
+##### Save shutdown #####
+Since the jumper for save shutdown and the original software provided is total $#!T, workaround. Use the voltage readout to safely shutdown and calculate the battery percentage. 
+
 ##### Domoticz #####
-If you use domoticz: Create a Voltage, Text and Percentage devices with the domoticzs dummy hardware. Look up their idx's and edit the x720battery.conf file. And make sure you enable it.
+If you use domoticz: Create a Voltage, Text and two Percentage devices with the domoticzs dummy hardware. Look up their idx's and edit the x720battery.conf file. And make sure you enable it.
 
 ##### MQTT #####
 If you use MQTT:
