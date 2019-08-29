@@ -94,7 +94,7 @@ sudo sed -i '$ i hwclock -s' /etc/rc.local
 ```
 
 #### The not so good stuff ####
-Set up the top button & stuff (do not use):
+Set up the top button & stuff (do not use!!!!!!!!!!):
 ```
 #sudo ./x720/x720button.sh
 ```
