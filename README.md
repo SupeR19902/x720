@@ -17,7 +17,8 @@ http://www.raspberrypiwiki.com/index.php/X720
 
 ##### Cons #####
 
- * Jumper for auto shutdown is 3v DC (according to their specs). But battery meter is so bad it will power off (not safe shutdown) at values lower then ~3.15v high, which is much higher then 3v. Making the jumper useless.
+ * Jumper for auto shutdown is 3v DC (according to their specs). But battery meter is so bad it will power off (not safe shutdown) at values lower then ~3.15v high, which is much higher then 3v. Making the jumper useless. DO NOT SET JUMPER
+ * If the shutdown problem occurs when removing the power plug, you have to remove the batteries!!! (geekworm you lying bastards!!!)
  * Network card can dissapear from your system completely, needing a power unplug (tested only without inserted batteries)
  * Little usb cable is reaaaly flimsy.
  * No wall mount holes in case
@@ -28,17 +29,18 @@ http://www.raspberrypiwiki.com/index.php/X720
  * Makes high pitch sound with no batteries
  * Sometimes make strange noise when pulling the power plug
  * Software provided is bad...  really really bad...
- * Support from either geekworm or the real manufacture is total crap (removing my comments on your youtube videos... really... and lying to you to sell, sell, sell...)
+ * Support from either geekworm or suptronics.com is total crap (removing my comments on your youtube videos... really... and lying to your customers to sell, sell, sell...)
  * Very, very crappy hat...
+ * Had to implement my own software
  
 ##### Pros #####
 
- * Work for more then 8 hours on batteries...
+ * If it works it works for more then 8 hours on batteries... (but so does a powerbank) and you can use the battery monitor workaround to save shutdown
  * Can use network bonding to double network card (doubles the speed with speedtest-cli on a pi 3b)
 
 ##### Conclusion #####
 
-Do not buy unless you known what you are doing and have considered the work arounds...
+Do not buy unless you known what you are doing and have considered the pro and cons (and work arounds)
 
 
 #### Make e-vironment great again! ####
