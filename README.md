@@ -13,19 +13,22 @@ git clone https://github.com/Tristan79/x720.git
 
 I fill in my rant here later!
 
+Only buy this if you are going to use the workarounds. And have almost no power outages. Pulling the plug CAN DAMAGE YOUR HAT AND YOUR PI!!! DO NOT PULL THE ADAPTER, AT LEAST WITH TESTING PULL THE PLUG AT THE PI END!!!
+
 http://www.raspberrypiwiki.com/index.php/X720
 
 ##### Cons #####
 
+* Mayor power spikes on gpio pins
+* Undervoltage detected when pulling the power plug
 * If the shutdown problem occurs when removing the power plug, your board is toast/fried/kaput!!!! (geekworm you lying bastards!!!)
 * The button script will cause reboots when power is lost
 * Jumper for auto shutdown is 3v DC (according to their specs). But battery meter is so bad it will power off (not safe shutdown) at values lower then ~3.15v high, which is much higher then 3v. Making the jumper useless. DO NOT SET JUMPER
- * Network card can dissapear from your system completely, needing a power unplug (tested only without inserted batteries)
+ * Network card can dissapear from your system completely, needing a power unplug and removal of the batteries
  * Little usb cable is reaaaly flimsy.
  * No wall mount holes in case
  * Battery meter is shit... I mean really shit...
  * Button on gpio triggered when unplugging the power, means spikes on (all/gpio?) electronics when switching from wired power to battery (and back)?
- * Undervoltage detected when pulling the power plug
  * Button for reboot or safe shutdown does not work without batteries present
  * Makes high pitch sound with no batteries
  * Sometimes make strange noise when pulling the power plug
