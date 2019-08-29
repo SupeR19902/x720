@@ -8,7 +8,6 @@
 git clone https://github.com/Tristan79/x720.git
 ```
 
-
 ### Review of x720 ###
 
 I fill in my rant here later!
@@ -129,6 +128,8 @@ If you use MQTT:
 edit the x720battery.conf file. And make sure you enable it.
 
 ### Bonding ###
+
+Using two wires as one!
 
 This will be a very short walkthrough of bonding... if you have issues well post an issue.
 
