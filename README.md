@@ -40,12 +40,12 @@ http://www.raspberrypiwiki.com/index.php/X720
  
 ##### Pros #####
 
- * If it works it works for more then 8 hours on batteries... (but so does a powerbank) but you can use the battery monitor workaround to save shutdown
+ * If it works it works for more then 8 hours on batteries... (but so does a powerbank) but you can use the battery monitor workaround to save shutdown making it somewhat an ups... almost.
  * Can use network bonding to double network card (doubles the speed with speedtest-cli on a pi 3b)
 
 ##### Conclusion #####
 
-Do not buy unless you known what you are doing and have considered the pro and cons (and work arounds)
+Do not buy unless you known what you are doing and have considered the pro and cons (and work arounds). I already fried one board...
 
 
 #### Make e-vironment great again! ####
