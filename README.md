@@ -2,16 +2,18 @@
  
  * Battery monitor: view status and/or send it to Domoticz or MQTT (Maxim MAX17043)
  * Battery monitor can be used with any generic Maxim MAX17043 (and probably MAX17044) connected to i2c
- * Safe shutdown workaround in software
- * Setting up properly the real time clock (DS1307)
+ * Safe shutdown workaround in software to bypass incorrect capicity reading
+ * Setting up properly the cheap real time clock (DS1307)
  
-## __WARNING: PULLING THE POWER CAN DAMAGE YOUR HAT AND YOUR PI!!! NEVER PULL THE ADAPTER FROM THE AC. AT LEAST WITH TESTING, PULL THE PLUG AT THE PI END!!!__ ## 
+## __WARNING: CUTTING THE MAIN POWER TO THE HAT CAN DAMAGE YOUR HAT AND YOUR PI IF BATTERIES ARE INSTALLED!!! NEVER PULL THE ADAPTER FROM THE AC. AT LEAST WITH TESTING, PULL THE PLUG AT THE PI END!!!__ ## 
 
 ## __Yeah... this hat is that bad! :(__ ##
 
-## __You bought it just to do that...__ ##
+## __You bought it just to be able to do that...__ ##
 
 ## __And now I am warning you NOT to do that...__ ##
+
+Well I am not amused either...
 
 ### see cons/*pros(?)* review below ###
 
@@ -19,14 +21,13 @@
 git clone https://github.com/Tristan79/x720.git
 ```
 
-Problems (and I mean big problems) and usage overlaps with suptronics x700, x730 and x735 (v2) which uses the same software and probably the same hardware design... and the new x705, x725 and x750.
-See review of x720.
+Problems (and I mean big problems) and usage overlaps with suptronics x700, x730 and x735 (v2) which is provided with the same software and probably the same hardware design... and the new x705, x725 and x750. See review of x720.
 
 You can modify/use this for any generic Maxim MAX17043 using the i2c bus.
 
 ### ToDo ###
  * Shutting down the hat when you call shutdown (sudo halt) (use gpio 18 and add it to /etc/rc0? as the final and last command)
- * Other power mangement GPIO stuff
+ * Other power mangement GPIO stuff (what does GPIO 17 do?)
  * Rant! (upvote in issues for youtube rant :-)
  * WOL...
 
@@ -34,56 +35,62 @@ You can modify/use this for any generic Maxim MAX17043 using the i2c bus.
 
 I fill in my full rant here later! 
 
-Which will be, uhm, yeah... terrible, is a word what does not cover this... and I will fully eleborate and explain the cons and pros (listed below)
+That will be, uhm, yeah... terrible,... is a word what does not cover this... and I will fully eleborate and explain the cons and pros (listed below)
 
 Parts used
- * 2x suptronic x720 hats (yeah, I have two... one is already broken)
+ * 2x suptronic x720 hats (yeah, I have two...)
  * 2x suptronic x720 cases
  * 2x raspberry Pi 3B (v1.2)
  * 4x brand new 18650B Panasonic batteries without protection
  * 2x geekworm 4A power adapters
 
-And yeah, it not only the hardware... but you came here because the software is as bad as the hardware...
-Only buy this if you are going to use the workarounds. And have almost no power outages, like one in every 5 years :(. 
+It is not only the hardware... but you came here because the software accompanied is as bad as the hardware...
+Problems occur on both hats, so it is NOT a randomly defective hardware problem. 
+
+Only buy this if considered the pros and cons, and you are going to use the workarounds. And have almost no power outages. Like one in every 5 years :(.  *## YOU HAVE BEEN WARNED ##*
 
 #### Cons ####
 
 ##### HAT #####
-* Mayor power spikes on gpio pins
-* Undervoltage detected when pulling the power plug
-* Button on gpio triggered when unplugging the power, means spikes on (all/gpio) electronics when switching from wired power to battery (and back)... 
-* Last con makes the top button for reboot or save shutdown useless! You can still use it as a power on button,or for total power down (make sure you run *sudo halt* first do not damage your sd card) 
-* If the shutdown problem occurs when removing the power plug, your board is toast/fried/kaput!!!! (geekworm you lying bastards!!! see https://www.youtube.com/watch?v=enWHudsFcuw)... With fully charged batteries and no power plug inserted and it will NOT TURN ON when pressing the top button then yeah.. it fried something. 
-* The button script will cause reboots when power is lost (related to gpio is triggered when...)
-* Jumper for auto shutdown is 3v DC (according to their specs). But battery meter is so bad it will power off (not safe shutdown) at values lower then ~3.15v high, which is much higher then 3v. Making the jumper useless. DO NOT SET JUMPER
+ * Mayor power spikes on GPIO pins when cutting main power
+ * Undervoltage detected when cutting the main power
+ * Top button, which uses GPIO, is triggered when cutting the main power. That also probably means spikes on all other electronics when switching from wired power to battery (and back)... 
+ * Previous con makes the top button for reboot or save shutdown useless! You can still use it as a power on button, or for total power down (make sure you run *sudo halt* first so to not damage your sd card) 
+ * If the shutdown problem occurs when removing the power plug, your board is toast/fried/kaput!!!! (geekworm you lying bastards!!! see https://www.youtube.com/watch?v=enWHudsFcuw)... With fully charged batteries and no power plug inserted. If it will *NOT TURN ON* when pressing the top button, you know you are screwed.
+ * The button script will cause reboots when power is lost (related to gpio is triggered when...)
+ * Jumper for auto shutdown is 3v DC (according to their specs). But battery meter is so bad it will power off (not safe shutdown) at values lower then ~3.15v high, which is much higher then 3v. Making the jumper useless. DO NOT SET JUMPER
  * Network card can dissapear from your system completely, needing a power unplug and removal of the batteries
- * Little usb cable is reaaaly flimsy and does sometimes not work (not related to network card disappearing thou)
+ * Provided little usb cable is reaaaly flimsy and does sometimes stops working. This is not related to network card disappearing thou
  * Battery meter is shit... I mean really shit...
- * Button for reboot or safe shutdown does not work without batteries present (their specs say otherwise, but it does not work... the gpio does NOT work)
- * Makes high pitch sound with no batteries (alas poor dogs & cats... and think of your little children which have still good ears)
- * Sometimes make strange noise when pulling the power plug
+ * Button for reboot or safe shutdown does not work without batteries present. Their specs say otherwise, but it does not work... The GPIO for the button does NOT work without batteries)
+ * Makes very, very high pitch sound with no batteries (alas poor dogs & cats... and think of your little children which have still good ears)
+ * RTC Time is reset due to bad design... (luckily I am running an NTP server using a usb GPS stick on the same pi)
+ * Sometimes make strange noise when cutting the main power
  * Software provided is bad...  really really bad...
  * Support from either geekworm or suptronics is total crap (geekworm... removing my comments on your youtube videos... really... stop lying to your customers...)
  * Very, very crappy hat... damages really fast with power outages
  * Had to implement my own software
- * When batteries are present and it is completly powered off (hold button for more then 8 to 10 seconds) inserting an usb device lights up/flickers the led on top of the case... 
+ * When batteries are present and it is completely powered off (hold button for more then 8 to 10 seconds) inserting an usb device or network cable in either ports, lights up/flickers the led on top of the case... you should probably never insert a HDMI cable or sound with the batteries already installed...
  
 ##### Case #####
- * No wall mount holes in case
- * Case Pi microusb has a big X with a circle... instead of closing it up
- * Case seales up the 5v output from the hat
- * Case becomes (static and/or the 5v is leaking to the case)
+ * No real wall mount holes in case
+ * Case Pi microusb has a big X with a circle... instead of closing it up (Bad design. Intentionally? Why? If you know it will damage the whole system???) 
+ * Case seals up the 5v output from the hat. Why is that closed and not the Pi microusb?
+ * Case feels static, or more probably, the 5v is leaking to the case and I have become ground
+ * Top button does not fit properly in the case (of one of the cases)
   
 #### Pros ####
- * If it works it works for more then 8 hours on batteries... (but so does a powerbank) *but* you can use the battery monitor workaround to save shutdown making it somewhat an ups... almost. 
+ * If it works it works for more then 8 hours on batteries... (but so does a powerbank) *but* you can use the battery monitor workaround to save shutdown making it somewhat an ups... almost... almost...
  * Can use network bonding to double network speed (tested with speedtest-cli on a pi)
- * Like the case (when I am not touching it see last con)
+ * Like the design of the case (when I am not touching it see last con)
 
 ##### Conclusion ####
-Do not buy unless you known what you are doing and have considered the pro and cons (and work arounds). I already fried one board...
+Do not buy this unless you known what you are doing and have considered the pros, cons and workarounds. 
 
-### So what... Tested on... ###
-Buster,...
+### So what... I already bought one... get on with it... ###
+
+Tested on...
+Buster (july 2019)
 
 #### Make e-vironment great again! ####
 
@@ -98,7 +105,7 @@ sudo pip3 install paho-mqtt
 
 ### Tick, Tack ###
 
-Setup the real time clock:
+Setup the real time clock (DS3107):
 
 sudo nano /boot/config.txt
 
@@ -171,12 +178,12 @@ See the legacy folder (please do not use)
 
 ##### GPIO IN 4 #####
 Button pressed. If pressed it will be none zero value. You have to time the button pressed to determine if you want to reboot or shutdown (or maybe do something else).
-Unplugging the power will result in triggering this gpio (due to spikes from unplugging)... so DO NOT USE the legacy x720button.sh script. It is useless.
+Unplugging the power will result in triggering this GPIO pin (due to spikes from unplugging)... so DO NOT USE the legacy x720button.sh script. It is useless. And forget about using software to use the button... it will not work in combination with a powerloss.
 
 ##### GPIO OUT 18 ##### 
-Cut power to hat, this will result in immediately power loss to the rasberry pi. This will not result in a save shutdown (because there is no power anymore). Usage: pull to 1 wait some time, pull back to 0.
+Cut power to hat, this will result in immediately power loss to the rasberry pi. This will not result in a save shutdown (because there is no power anymore). Usage: pull to 1 wait some time, pull back to 0. DO NOT USE the original x720shutdown script. It will eventually corrupt your sd card.
 
-Maybe add it to /etc/rc0? Or something equivalent? Executing it as the last command. Please share your thoughts in the comments...
+Maybe add it to /etc/rc0? Or something equivalent? Executing it as the last command. Please share your thoughts in the issues...
 
 ##### GPIO OUT 17 #####
 Pull to 1 to do something. No really no idea what it does... probably does something...
