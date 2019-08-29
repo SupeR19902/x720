@@ -60,7 +60,7 @@ sudo pip3 install smbus
 sudo pip3 install paho-mqtt
 ```
 
-#### Tick, Tack ####
+### Tick, Tack ###
 
 Setup the real time clock:
 
