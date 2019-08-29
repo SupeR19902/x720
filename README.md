@@ -2,7 +2,7 @@
  
  * Battery monitor: view status and/or send it to Domoticz or MQTT (Maxim MAX17043)
  * Battery monitor can be used with any generic Maxim MAX17043 (and probably MAX17044) connected to i2c
- * Safe shutdown workaround in software to bypass incorrect capicity reading
+ * Safe shutdown workaround in software to bypass incorrect capacity reading
  * Setting up properly the cheap real time clock (DS1307)
  
 ## __WARNING: CUTTING THE MAIN POWER TO THE HAT CAN DAMAGE YOUR HAT AND YOUR PI IF BATTERIES ARE INSTALLED!!! NEVER PULL THE ADAPTER FROM THE AC. AT LEAST WITH TESTING, PULL THE PLUG AT THE PI END!!!__ ## 
