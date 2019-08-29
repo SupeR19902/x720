@@ -1,4 +1,5 @@
 #!/bin/bash
+# cut power of hat (will cut power to pi, without save shutdown...)
 
 BUTTON=18
 
