@@ -38,7 +38,9 @@ http://www.raspberrypiwiki.com/index.php/X720
  * Can use network bonding to double network card (doubles the speed with speedtest-cli on a pi 3b)
 
 ##### Conclusion #####
-    
+
+Do not buy unless you known what you are doing and have considered the work arounds...
+
 
 #### Make evironment great again! ####
 
