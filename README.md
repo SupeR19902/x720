@@ -12,7 +12,7 @@ git clone https://github.com/Tristan79/x720.git
  * Top button press without rebooting (or at least use the button for something else) 
  * Shutting down the hat when shutdown (gpio 18 add it to /etc/rc0? as the final and last command)
  * Other power mangement GPIO stuff
- * Rant!
+ * Rant! (upvote in issues for youtube rant :-)
  * WOL...
 
 ### Review of x720 ###
