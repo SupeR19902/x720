@@ -50,13 +50,11 @@ http://www.raspberrypiwiki.com/index.php/X720
  * Case becomes static...
   
 #### Pros ####
-
  * If it works it works for more then 8 hours on batteries... (but so does a powerbank) but you can use the battery monitor workaround to save shutdown making it somewhat an ups... almost.
  * Can use network bonding to double network card (doubles the speed with speedtest-cli on a pi 3b)
  * Like the case (when I am not touching it see last con)
 
-##### Conclusion #####
-
+##### Conclusion ####
 Do not buy unless you known what you are doing and have considered the pro and cons (and work arounds). I already fried one board...
 
 ### So what... Tested on... ###
@@ -140,12 +138,22 @@ If you use domoticz: Create a Voltage, Text and two Percentage devices with the 
 If you use MQTT:
 edit the x720battery.conf file. And make sure you enable it.
 
-## Very Optional Features ##
+### Very Optional Features ###
 
+`#### GPIO ####
+
+##### GPIO IN 4 #####
+Button pressed. If pressed it will be none zero value. You have to time the button pressed to determine if you want to reboot or shutdown (or maybe do something else)
+
+##### GPIO OUT 18 ##### 
+Cut power to hat, this will result in immediately power loss to the rasberry pi. This will not result in a save shutdown (since there is no power). Usage: pull to 1 wait some time, pull back to 0.
+
+##### GPIO OUT 17 #####
+Pull to 1 to do something. No idea what...
+
+#### Bonding ####
 This can also be used with other network cards and other debian installations. No x720 or Pi needed. But because I figured this out with a Pi and with a x720 (total cost: 3 weeks, yeah...), lets share... I probably need to add some more info...
 So fast track to bonding...
-
-### Bonding ###
 
 Reference: https://raspberrypi.stackexchange.com/revisions/78788/15
 
@@ -298,7 +306,7 @@ DHCP=yes
 RouteMetric=10
 ```
 
-#### VLAN ####
+##### VLAN #####
 
 This is very, very, mucho very optional.... If you want a vlan over a bond...
 
