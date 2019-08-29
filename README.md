@@ -1,4 +1,4 @@
-# Rasberry Pi suptronics/geekworm x720 Hat Tools #
+# Rasberry Pi suptronics/geekworm x720 (x700/x705/x725/x730/x735/x750) Hat Tools #
  
  * Battery monitor: view status and/or send it to Domoticz or MQTT
  * Safe shutdown workaround in software
@@ -7,6 +7,9 @@
 ```
 git clone https://github.com/Tristan79/x720.git
 ```
+
+Problems and usage overlaps with suptronics x700, x730 and x735 (v2) which uses the same software and probably the new x705, x725 and x750.
+See review of x720.
 
 ### ToDo ###
  * Top button press without rebooting (or at least use the button for something else) 
@@ -142,14 +145,19 @@ edit the x720battery.conf file. And make sure you enable it.
 
 #### GPIO ####
 
+See the legacy folder (please do not use)
+
 ##### GPIO IN 4 #####
-Button pressed. If pressed it will be none zero value. You have to time the button pressed to determine if you want to reboot or shutdown (or maybe do something else)
+Button pressed. If pressed it will be none zero value. You have to time the button pressed to determine if you want to reboot or shutdown (or maybe do something else).
+Unplugging the power will result in triggering this gpio (due to spikes from unplugging)... so DO NOT USE the legacy x720button.sh script. It is useless.
 
 ##### GPIO OUT 18 ##### 
-Cut power to hat, this will result in immediately power loss to the rasberry pi. This will not result in a save shutdown (since there is no power). Usage: pull to 1 wait some time, pull back to 0.
+Cut power to hat, this will result in immediately power loss to the rasberry pi. This will not result in a save shutdown (because there is no power anymore). Usage: pull to 1 wait some time, pull back to 0.
+
+Maybe add it to /etc/rc0? Or something equivalent? Executing it as the last command. Please share your thoughts in the comments...
 
 ##### GPIO OUT 17 #####
-Pull to 1 to do something. No idea what...
+Pull to 1 to do something. No really no idea what it does... probably does something...
 
 #### Bonding ####
 This can also be used with other network cards and other debian installations. No x720 or Pi needed. But because I figured this out with a Pi and with a x720 (total cost: 3 weeks, yeah...), lets share... I probably need to add some more info...
