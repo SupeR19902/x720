@@ -177,7 +177,7 @@ See the legacy folder (please do not use)
 
 ##### GPIO IN 4 #####
 Button pressed. If pressed it will be none zero value. You have to time the button pressed to determine if you want to reboot or shutdown (or maybe do something else).
-Unplugging the power will result in triggering this GPIO pin (due to spikes from unplugging)... so DO NOT USE the legacy x720button.sh script. It is useless. And forget about using software to use the button... it will not work in combination with a powerloss. Also note that if you hold the button long enough with will power of the hat and thus the pi...
+Unplugging the power will result in triggering this GPIO pin (due to spikes from unplugging) and thus rebooting... so DO NOT USE the legacy x720button.sh script (or the original x720pwr.sh script) . It is useless. It will not work in combination with a powerloss. Also note that if you hold the button long enough with will power of the hat and thus the pi... Maybe you can time it beter. Since it will reboot and not shutdown, so removing the reboot will probably work leaving only the shutdown part, but then see next GPIO... How will you trigger, the GPIO 18 as the very last command when shutting down... But you can probably remove the reboot part and replace the shutdown with something else usefull... (will experiment later)
 
 ##### GPIO OUT 18 ##### 
 Cut power to hat, this will result in immediately power loss to the rasberry pi. This will not result in a save shutdown (because there is no power anymore). Usage: pull to 1 wait some time, pull back to 0. DO NOT USE the original x720shutdown script. It will eventually corrupt your sd card.
