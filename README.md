@@ -22,11 +22,11 @@ git clone https://github.com/Tristan79/x720.git
 Problems (and I mean big problems) and usage overlaps with suptronics x700, x730 and x735 (v2) which uses the same software and probably the same hardware design... and the new x705, x725 and x750.
 See review of x720.
 
-You can modify/use this for any generic Maxim MAX17043 
+You can modify/use this for any generic Maxim MAX17043 using the i2c bus.
 
 ### ToDo ###
  * Top button press without rebooting (or at least use the button for something else) 
- * Shutting down the hat when shutdown (gpio 18 add it to /etc/rc0? as the final and last command)
+ * Shutting down the hat when you call shutdown (sudo halt) (use gpio 18 and add it to /etc/rc0? as the final and last command)
  * Other power mangement GPIO stuff
  * Rant! (upvote in issues for youtube rant :-)
  * WOL...
@@ -53,29 +53,30 @@ Only buy this if you are going to use the workarounds. And have almost no power 
 * Mayor power spikes on gpio pins
 * Undervoltage detected when pulling the power plug
 * Button on gpio triggered when unplugging the power, means spikes on (all/gpio) electronics when switching from wired power to battery (and back)... 
-* If the shutdown problem occurs when removing the power plug, your board is toast/fried/kaput!!!! (geekworm you lying bastards!!! see https://www.youtube.com/watch?v=enWHudsFcuw)... In my case, with fully charged batteries and no power plug inserted it will NOT TURN ON when pressing the top button (yeah.. it fried something). 
-* The button script will cause reboots when power is lost
+* If the shutdown problem occurs when removing the power plug, your board is toast/fried/kaput!!!! (geekworm you lying bastards!!! see https://www.youtube.com/watch?v=enWHudsFcuw)... With fully charged batteries and no power plug inserted and it will NOT TURN ON when pressing the top button then yeah.. it fried something. 
+* The button script will cause reboots when power is lost (related to gpio is triggered when...)
 * Jumper for auto shutdown is 3v DC (according to their specs). But battery meter is so bad it will power off (not safe shutdown) at values lower then ~3.15v high, which is much higher then 3v. Making the jumper useless. DO NOT SET JUMPER
  * Network card can dissapear from your system completely, needing a power unplug and removal of the batteries
  * Little usb cable is reaaaly flimsy and does sometimes not work (not related to network card disappearing thou)
  * Battery meter is shit... I mean really shit...
- * Button for reboot or safe shutdown does not work without batteries present (their specs say otherwise)
+ * Button for reboot or safe shutdown does not work without batteries present (their specs say otherwise, but it does not work... the gpio does NOT work)
  * Makes high pitch sound with no batteries (alas poor dogs & cats... and think of your little children which have still good ears)
  * Sometimes make strange noise when pulling the power plug
  * Software provided is bad...  really really bad...
- * Support from either geekworm or suptronics.com is total crap (geekworm... removing my comments on your youtube videos... really... stop lying to your customers...)
+ * Support from either geekworm or suptronics is total crap (geekworm... removing my comments on your youtube videos... really... stop lying to your customers...)
  * Very, very crappy hat... damages really fast with power outages
  * Had to implement my own software
+ * When batteries are present and it is completly powered off (hold button for more then 8 to 10 seconds) inserting an usb device lights up/flickers the led on top of the case... 
  
 ##### Case #####
  * No wall mount holes in case
  * Case Pi microusb has a big X with a circle... instead of closing it up
  * Case seales up the 5v output from the hat
- * Case becomes static...
+ * Case becomes (static and/or the 5v is leaking to the case)
   
 #### Pros ####
- * If it works it works for more then 8 hours on batteries... (but so does a powerbank) but you can use the battery monitor workaround to save shutdown making it somewhat an ups... almost.
- * Can use network bonding to double network card (doubles the speed with speedtest-cli on a pi)
+ * If it works it works for more then 8 hours on batteries... (but so does a powerbank) *but* you can use the battery monitor workaround to save shutdown making it somewhat an ups... almost. 
+ * Can use network bonding to double network speed (tested with speedtest-cli on a pi)
  * Like the case (when I am not touching it see last con)
 
 ##### Conclusion ####
