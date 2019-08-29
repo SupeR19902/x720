@@ -246,7 +246,7 @@ Bond=bond0
 #PrimarySlave=true
 ```
 
-If you use ActiveBackup you can add your Wifi if you want to...
+Very optional!!! If you use ActiveBackup you can add your Wifi if you want to... (failover to wifi if lan cables are pulled)
 
 sudo nano /etc/systemd/network/20-bond0-add-wifi.network
 
@@ -256,6 +256,8 @@ Name=wl*
 [Network]
 Bond=bond0
 ```
+
+I do not use Wifi... and you can not do a bond in bond as on some other OSes :( so...
 
 To continue...
 
@@ -276,7 +278,7 @@ RouteMetric=10
 
 #### VLAN ####
 
-This is very, very optional.... If you have a vlan over a bond...
+This is very, very, mucho very optional.... If you want a vlan over a bond...
 
 ```
 sudo nano /etc/systemd/network/25-bond0-vlan1003.netdev
