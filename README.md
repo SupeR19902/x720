@@ -191,7 +191,9 @@ Pull to 1 to do something. No really no idea what it does... probably does somet
 This can also be used with other network cards and other debian installations. No x720 or Pi needed. But because I figured this out with a Pi and with a x720 (total cost: 3 weeks, yeah...), lets share... I probably need to add some more info...
 So fast track to bonding...
 
-Reference: https://raspberrypi.stackexchange.com/revisions/78788/15
+Reference: https://raspberrypi.stackexchange.com/questions/78787/howto-migrate-from-networking-to-systemd-networkd-with-dynamic-failover
+
+*Did not use but is almost the same: https://raspberrypi.stackexchange.com/revisions/78788/15*
 
 Using two wires as one!
 
