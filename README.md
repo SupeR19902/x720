@@ -1,7 +1,7 @@
 # Rasberry Pi x720 Hat Tools #
  
- * Battery monitor: view or send to Domoticz or MQTT
- * Safe shutdown workaround
+ * Battery monitor: view status and/or send it to Domoticz or MQTT
+ * Safe shutdown workaround in software
  * Setting up the real time clock
  
 ```
@@ -9,7 +9,7 @@ git clone https://github.com/Tristan79/x720.git
 ```
 
 
-#### Review of x720 ####
+### Review of x720 ###
 
 I fill in my rant here later!
 
@@ -47,7 +47,7 @@ http://www.raspberrypiwiki.com/index.php/X720
 
 Do not buy unless you known what you are doing and have considered the pro and cons (and work arounds). I already fried one board...
 
-#### So what... Tested on... ####
+### So what... Tested on... ###
 Buster,...
 
 #### Make e-vironment great again! ####
@@ -71,7 +71,7 @@ sudo nano /boot/config.txt
 dtoverlay=i2c-rtc,ds1307
 ```
 
-Remove fake hardware clock and disable one of the time synchronizers
+Remove fake hardware clock
 ```
 sudo systemctl disable fake-hwclock
 ```
@@ -91,21 +91,7 @@ sudo hwclock -d
 timedatectl status
 ```
 
-
-Original code (do not use)
-```
-sudo sed -i '$ i rtc-ds1307' /etc/modules
-sudo sed -i '$ i echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device' /etc/rc.local
-sudo sed -i '$ i hwclock -s' /etc/rc.local
-```
-
-#### The not so good stuff ####
-Set up the top button & stuff (do not use!!!!!!!!!!):
-```
-#sudo ./x720/x720button.sh
-```
-
-#### For Now Crappy Battery Monitor ####
+### Software Battery Monitor ###
 Run the battery monitor 
 
 ```
@@ -133,8 +119,7 @@ Add the line
 Create battery monitor configuration file x720battery.conf. Use the included example configuration file as base.
 
 ##### Save shutdown #####
-Since the jumper for save shutdown and the original software provided is total $#!T, workaround. Use the voltage readout to safely shutdown and calculate the battery percentage. 
-You can adjust the values in the configuration file.
+Since the jumper for save shutdown and the original software provided is total $#!T, workaround. Use the voltage readout to safely shutdown and calculate the battery percentage. You can adjust the values in the configuration file.
 
 ##### Domoticz #####
 If you use domoticz: Create a Voltage, Text and two Percentage devices with the domoticzs dummy hardware. Look up their idx's and edit the x720battery.conf file. And make sure you enable it.
@@ -143,11 +128,15 @@ If you use domoticz: Create a Voltage, Text and two Percentage devices with the 
 If you use MQTT:
 edit the x720battery.conf file. And make sure you enable it.
 
-#### Bonding ####
+### Bonding ###
 
-I currently use a netgear gs116 which support XOR bonding (thanks netgear :( for letting me think I have all the functionallity of LACP but I only got the subset for XOR bonding... netgear just as cheap as their chinese counterparts, only they can hide it better... vommit...) But you can use FULL LACP or Active Backup...
+This will be a very short walkthrough of bonding... if you have issues well post an issue.
 
-And I switches over to systemd networking instead of /etc/network/interfaces. I tried the default option (this bonding cost me 2 weeks) and it will result in connecting to wifi (if configured and available) randomly. Which is behaviour you do not want... Finally found a solution... Systemd networking fix it.
+I currently use a netgear gs116 which support LAG, actually it is XOR bonding (thanks netgear :( for letting me think I have all the functionallity of LACP but I only got the subset for XOR bonding... netgear just as cheap as their chinese counterparts, only they can hide it better... vommit... documentation just as shit... what is it with you hardware sellers. Make a good product instead of manipulating your customers) If you use LACP or XOR bonding do not forget to configure your switch.
+
+You can use FULL LACP or Active Backup... (google is your friend) for the parameters needed.
+
+I switches over to systemd networking instead of /etc/network/interfaces. I tried the default option with the /etc/network/interfaces and it will result in connecting to wifi (if configured and available) instead of the bond, and it happens in the eye of the beholder randomly. Which is behaviour you do not want... Finally found a solution... Systemd networking fix it. Systemd has very very very poor documentation... :-( 
 
 ```
 sudo nano /etc/resolvconf.conf
@@ -160,7 +149,7 @@ Add
 resolvconf=NO
 ```
 
-Run
+Run to switch over to systemd networking
 
 ```
 sudo systemctl mask networking.service
@@ -186,14 +175,16 @@ update_config=1
 country=DE
 
 network={
-    ssid="I"
+    ssid="CHANGE"
     proto=RSN
     key_mgmt=WPA-PSK
     pairwise=CCMP TKIP
     group=CCMP TKIP
-    psk="PASSWORD"
+    psk="CHANGE"
 }
 ```
+
+Run it...
 
 ```
 sudo chmod 600 /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
@@ -201,6 +192,7 @@ sudo systemctl disable wpa_supplicant.service
 sudo systemctl enable wpa_supplicant@wlan0.service
 ```
 
+Configure it...
 ```
 sudo nano /etc/systemd/network/08-wifi.network
 ```
@@ -243,7 +235,7 @@ MIIMonitorSec=1s
 sudo nano /etc/systemd/network/16-bond0-add-eth.network
 ```
 
-Split these in two files for ActiveBackup, one with PrimarySlave and the other not... (Name=eth0 or eth1 instead of e*)
+Split these in two files for ActiveBackup, one with PrimarySlave and the other not... (Name=eth0 and eth1 instead of e*)
 
 ```
 [Match]
@@ -283,7 +275,7 @@ RouteMetric=10
 
 #### VLAN ####
 
-if you have a vlan over a bond
+This is very, very optional.... If you have a vlan over a bond...
 
 ```
 sudo nano /etc/systemd/network/25-bond0-vlan1003.netdev
@@ -298,7 +290,7 @@ Kind=vlan
 Id=1003
 ```
 
-Sidenote: The vlan 1003 is the guest network of the Apple Airports I have, which I use as a second (wifi) network running my IOT devices... In my case vlan 1003 had no internet. Make sure the Airport is in bridge mode... NOT in any other mode...
+Sidenote: The vlan 1003 is the guest network of the Apple Airports I have, which I use as a second (wifi) network running my IOT devices... In my case vlan 1003 had no internet access. Make sure the Airport is in bridge mode... NOT in any other mode...
 
 You can use dhcp from another device on the vlan, but I use the build in DHCP server
 
@@ -333,4 +325,32 @@ sudo apt --autoremove purge dhcpcd5 -y
 sudo apt --autoremove purge isc-dhcp-client isc-dhcp-common -y
 sudo apt --autoremove purge $(deborphan)
 sudo apt --autoremove purge $(deborphan) #two times
+```
+
+##### Extra usefull command #####
+
+```
+cat /proc/net/bonding/bond0 
+```
+
+```
+sudo apt-get install arp-scan
+sudo arp-scan --interface=bond0.1003 --localnet 
+sudo apt-get install nmap
+sudo nmap -sP 10.0.1.0/24 
+sudo netstat -plunt
+pip3 install speedtest-cli
+speedtest
+```
+
+Please try the speedtest (-single parameter) to see throughput is doubled (unless your isp is too slow)
+
+##### Do not bridge mdns #####
+```
+sudo nano avahi-daemon.conf 
+```
+
+```
+deny-interfaces=bond0.1003
+allow-interfaces=bond0
 ```
