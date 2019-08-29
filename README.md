@@ -17,8 +17,9 @@ http://www.raspberrypiwiki.com/index.php/X720
 
 ##### Cons #####
 
+* If the shutdown problem occurs when removing the power plug, your board is toast/fried/kaput!!!! (geekworm you lying bastards!!!)
+* The button script will cause reboots when power is lost
  * Jumper for auto shutdown is 3v DC (according to their specs). But battery meter is so bad it will power off (not safe shutdown) at values lower then ~3.15v high, which is much higher then 3v. Making the jumper useless. DO NOT SET JUMPER
- * If the shutdown problem occurs when removing the power plug, you have to remove the batteries!!! (geekworm you lying bastards!!!)
  * Network card can dissapear from your system completely, needing a power unplug (tested only without inserted batteries)
  * Little usb cable is reaaaly flimsy.
  * No wall mount holes in case

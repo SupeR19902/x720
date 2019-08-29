@@ -77,7 +77,7 @@ status = "Normal"
     """
 
 capacity = 0
-if voltage > x720_max:
+if voltage >= x720_max:
     capacity = 100
     status = "Max"
 elif voltage < x720_min:
