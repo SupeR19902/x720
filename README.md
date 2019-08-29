@@ -4,11 +4,13 @@
  * Safe shutdown workaround in software
  * Setting up the real time clock
  
-## __WARNING: Pulling the power CAN DAMAGE YOUR HAT AND YOUR PI!!! NEVER PULL THE ADAPTER, AT LEAST WITH TESTING PULL THE PLUG AT THE PI END!!!__ ## 
+## __WARNING: PULLING THE POWER CAN DAMAGE YOUR HAT AND YOUR PI!!! NEVER PULL THE ADAPTER FROM THE AC. AT LEAST WITH TESTING, PULL THE PLUG AT THE PI END!!!__ ## 
 
-## __Yeah... it's that bad!__ ##
+## __Yeah... it's that bad! :(__ ##
 
-## __You bought it just to do that... and now I am warning you NOT to do that...see review__ ##
+## __You bought it just to do that...__ ##
+
+## __And now I am warning you NOT to do that...see review__ ##
 
 ```
 git clone https://github.com/Tristan79/x720.git
