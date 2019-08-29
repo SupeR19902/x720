@@ -47,6 +47,8 @@ http://www.raspberrypiwiki.com/index.php/X720
 
 Do not buy unless you known what you are doing and have considered the pro and cons (and work arounds). I already fried one board...
 
+#### So what... Tested on... ####
+Buster,...
 
 #### Make e-vironment great again! ####
 
@@ -140,3 +142,195 @@ If you use domoticz: Create a Voltage, Text and two Percentage devices with the 
 ##### MQTT #####
 If you use MQTT:
 edit the x720battery.conf file. And make sure you enable it.
+
+#### Bonding ####
+
+I currently use a netgear gs116 which support XOR bonding (thanks netgear :( for letting me think I have all the functionallity of LACP but I only got the subset for XOR bonding... netgear just as cheap as their chinese counterparts, only they can hide it better... vommit...) But you can use FULL LACP or Active Backup...
+
+And I switches over to systemd networking instead of /etc/network/interfaces. I tried the default option (this bonding cost me 2 weeks) and it will result in connecting to wifi (if configured and available) randomly. Which is behaviour you do not want... Finally found a solution... Systemd networking fix it.
+
+```
+sudo nano /etc/resolvconf.conf
+```
+
+Add
+
+```
+# Set to NO to disable resolvconf from running any subscribers. Defaults to YES.
+resolvconf=NO
+```
+
+Run
+
+```
+sudo systemctl mask networking.service
+sudo systemctl mask dhcpcd.service
+sudo mv /etc/network/interfaces /etc/network/interfaces~
+sudo systemctl enable systemd-networkd.service
+sudo systemctl enable systemd-resolved.service
+# for fast prompt on screen when connecting with HDMI
+sudo systemctl disable systemd-networkd-wait-online.service
+sudo systemctl mask systemd-networkd-wait-online.service
+sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+```
+
+##### Optional Wifi #####
+
+```
+sudo nano /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
+```
+
+```
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=DE
+
+network={
+    ssid="I"
+    proto=RSN
+    key_mgmt=WPA-PSK
+    pairwise=CCMP TKIP
+    group=CCMP TKIP
+    psk="PASSWORD"
+}
+```
+
+```
+sudo chmod 600 /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
+sudo systemctl disable wpa_supplicant.service
+sudo systemctl enable wpa_supplicant@wlan0.service
+```
+
+```
+sudo nano /etc/systemd/network/08-wifi.network
+```
+
+```
+[Match]
+Name=wl*
+
+[Network]
+# to use static IP (with your settings) toggle commenting the next 5 lines.
+#Address=192.168.1.87/24
+#Gateway=192.168.1.1
+DHCP=yes
+
+[DHCP]
+RouteMetric=20
+```
+
+##### Ethernet #####
+The commented out lines are for Active Backup...
+
+```
+sudo nano /etc/systemd/network/12-bond0.netdev
+```
+
+```
+[NetDev]
+Name=bond0
+Kind=bond
+
+[Bond]
+Mode=balance-xor  
+#Mode=active-backup
+#PrimaryReselectPolicy=always
+TransmitHashPolicy=layer3+4
+MIIMonitorSec=1s
+```
+
+```
+sudo nano /etc/systemd/network/16-bond0-add-eth.network
+```
+
+Split these in two files for ActiveBackup, one with PrimarySlave and the other not... (Name=eth0 or eth1 instead of e*)
+
+```
+[Match]
+Name=e*
+[Network]
+Bond=bond0
+#PrimarySlave=true
+```
+
+If you use ActiveBackup you can add your Wifi if you want to...
+
+sudo nano /etc/systemd/network/20-bond0-add-wifi.network
+
+```
+[Match]
+Name=wl*
+[Network]
+Bond=bond0
+```
+
+To continue...
+
+```
+sudo nano /etc/systemd/network/24-bond0-up.network
+```
+
+```
+[Match]
+Name=bond0
+[Network]
+DHCP=yes
+#VLAN=bond0.1003
+
+[DHCP]
+RouteMetric=10
+```
+
+#### VLAN ####
+
+if you have a vlan over a bond
+
+```
+sudo nano /etc/systemd/network/25-bond0-vlan1003.netdev
+```
+
+```
+[NetDev]
+Name=bond0.1003
+Kind=vlan
+
+[VLAN]
+Id=1003
+```
+
+Sidenote: The vlan 1003 is the guest network of the Apple Airports I have, which I use as a second (wifi) network running my IOT devices... In my case vlan 1003 had no internet. Make sure the Airport is in bridge mode... NOT in any other mode...
+
+You can use dhcp from another device on the vlan, but I use the build in DHCP server
+
+```
+sudo nano /etc/systemd/network/26-bond0-vlan1003.network
+```
+
+```
+[Match]
+Name=bond0.1003
+
+[Network]
+Address=10.0.1.1
+DHCPServer=yes
+#IPMasquerade=yes
+
+[DHCPServer]
+PoolOffset=100
+PoolSize=100
+EmitDNS=yes
+DNS=10.0.0.2
+```
+
+If you set IPMasquerade=yes, it will bridge your networks.
+
+##### Optional Clean Up #####
+```
+sudo apt install deborphan
+sudo apt --autoremove purge openresolv -y
+sudo apt --autoremove purge ifupdown -y
+sudo apt --autoremove purge dhcpcd5 -y
+sudo apt --autoremove purge isc-dhcp-client isc-dhcp-common -y
+sudo apt --autoremove purge $(deborphan)
+sudo apt --autoremove purge $(deborphan) #two times
+```
